@@ -1,18 +1,21 @@
 import type { Config } from "tailwindcss";
+// @ts-expect-error: No type definitions for daisyui
+import daisyui from "daisyui";
 
-export default {
+const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx}", // Next.js App Router
+    "./pages/**/*.{js,ts,jsx,tsx}", // Next.js Pages Router
+    "./components/**/*.{js,ts,jsx,tsx}", // Your components
+    "./src/**/*.{js,ts,jsx,tsx}", // If using /src folder
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+    extend: {},
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [daisyui],
+  daisyui: {
+    themes: ["light", "dark"], // Optional
+  },
+};
+
+export default config;
